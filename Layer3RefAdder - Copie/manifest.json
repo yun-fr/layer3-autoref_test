@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Layer3 Ref Switcher",
+  "version": "1.0",
+  "description": "Add a ref automatically (1/3 of the time it'll be dev ref) on app.layer3.xyz",
+  "permissions": [
+    "storage",
+    "*://*.layer3.xyz/quests/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.layer3.xyz/quests/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
