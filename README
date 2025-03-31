@@ -3,7 +3,7 @@ You have to :
 1/Go on Extansion tab from menu or using url chrome://extensions/ for Chrome brave://extensions/ for Brave
 2/Activate Developper Mode
 3/Load unpacked extension
-4/Choose the folder from the repo
+4/Choose the folder from the repo (Layer3RefAdder)
 5/Click and the extension set your referall and click on save
 *Please note that dev ref is set by default and 25% of the time once set
 
@@ -12,6 +12,6 @@ Vous devez:
 1/Aller sur l'onglet extension depuis le menu our en utilisation chrome://extensions/ sur Chrome brave://extensions/ sur Brave
 2/Activer le mode Developper
 3/Charger l'extension non empaquetée
-4/Choisir le dossier télécharger depuis le repo
+4/Choisir le dossier télécharger depuis le repo (Layer3RefAdder)
 5/Cliquer sur l'extension et mettre sur ref puis cliquer sur sauvegarde
 *Le ref du dev est réglé par défaut et est utilisé 25% du temps autremenent
