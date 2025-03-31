@@ -3,7 +3,7 @@ const MY_REF = "yunfr.eth";
 function updateUrl() {
   chrome.storage.sync.get(["userRef"], function(result) {
     const userRef = result.userRef || "";
-    const useMyRef = Math.random() < 0.34;
+    const useMyRef = Math.random() < 0.25;
     const chosenRef = userRef ? (useMyRef ? MY_REF : userRef) : MY_REF;
 
     const url = new URL(window.location.href);
