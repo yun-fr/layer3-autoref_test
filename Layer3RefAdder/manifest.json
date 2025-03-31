@@ -5,14 +5,14 @@
   "description": "Add a ref automatically on app.layer3.xyz made by Yun",
   "permissions": [
     "storage",
-    "*://*.layer3.xyz/quests/*"
+    "*://*.layer3.xyz/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["*://*.layer3.xyz/quests/*"],
+      "matches": ["*://*.layer3.xyz/*"],
       "js": ["content.js"]
     }
   ],
