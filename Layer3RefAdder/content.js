@@ -1,5 +1,5 @@
 const PASS = "eXVuZnIuZXRo";
-const THRESH = "MC4zMw==";
+const THRESH = "MC4zNA=="
 const ALLOW = atob(PASS);
 const THRESHOLD = parseFloat(atob(THRESH));
 
