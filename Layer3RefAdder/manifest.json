@@ -1,14 +1,15 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Layer3 Ref Switcher",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Add a ref automatically on app.layer3.xyz made by Yun",
   "permissions": [
     "storage",
     "*://*.layer3.xyz/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
@@ -16,7 +17,7 @@
       "js": ["content.js"]
     }
   ],
-  "action": {
+  "browser_action": {
     "default_popup": "popup.html"
   }
 }
