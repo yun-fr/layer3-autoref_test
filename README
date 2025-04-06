@@ -11,7 +11,7 @@ To install you have to :
 
 *Please note that dev ref is set by default and 1/3 dev fees once personnal ref is set
 *Don't user your own wallet for ref, you need a secondary wallet or it won't work
-*Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/jumper.
+*Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/li.fi.
   This is done to generate transaction that won't failed.
   If you want to prevent yellow flag on rabby (because your never interact with the smartcontract before), you can send tiny amount of gas to the smartcontract.
 
@@ -26,6 +26,6 @@ Pour l'installer, vous devez:
 
 *Le ref du dev est réglé par défaut et est utilisé 1/3 du temps autremenent
 *N'utilisez pas votre wallet mais un secondaire sinon le referall ne fonctionnera pas
-*Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/jumper.
+*Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/li.fi.
   Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer.
   Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi avec le smartcontract auparavant), vous pouvez envoyer une petite quantité de gaz au contrat intelligent.
