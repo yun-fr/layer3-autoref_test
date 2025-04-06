@@ -1,37 +1,31 @@
 ENGLISH/FRANCAIS (FRANCAIS PLUS BAS)
 ================ENGLISH==================================
 
-This is a Chrome extension that work on Chrome and Brave.
-You have to :
-1/Go on Extansion tab from menu or using url chrome://extensions/ for Chrome brave://extensions/ for Brave
-2/Activate Developper Mode
-3/Load unpacked extension
-4/Choose the folder from the repo (Layer3RefAdder)
-5/Click on the extension set your referall and click on save
-*Please note that dev ref is set by default and 1/3 dev fees once personnal ref is set
+This is a tampermonkey script that work on Chrome/Brave/Firefox
+The goal is to add ref on link and to got a interface to send transaction on different blockchain.
+To install you have to :
+1/Install tampermonkey
+2/Add a new script and copy/past the code from Tampermonkey_script
+3/GO to/Refresh layer3 website and click on icon top left to start
 
-1/To use extra utility you have to install tampermonkey
-2/add a new script and copy/past the code from Tampermonkey_script
+*Please note that dev ref is set by default and 1/3 dev fees once personnal ref is set
 *Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/jumper.
-This is done to generate transaction that won't failed.
-If you want to prevent yellow flag on rabby (because your never interact before), you can send tiny amount of gas to the smartcontract.
+  This is done to generate transaction that won't failed.
+  If you want to prevent yellow flag on rabby (because your never interact before), you can send tiny amount of gas to the smartcontract.
 
 ================FRANCAIS==================================
 
-Ceci est une extension Chrome qui fonctionne sur Chrome et Brave
-Vous devez:
-1/Aller sur l'onglet extension depuis le menu our en utilisation chrome://extensions/ sur Chrome brave://extensions/ sur Brave
-2/Activer le mode Developper
-3/Charger l'extension non empaquetée
-4/Choisir le dossier télécharger depuis le repo (Layer3RefAdder)
-5/Cliquer sur l'extension et mettre son ref puis cliquer sur sauvegarde
-*Le ref du dev est réglé par défaut et est utilisé 1/3 du temps autremenent
-
+Ceci est un script tampermonkey qui fonctionne sur Brave/Chrome/Firefox
+Le but de ce script est d'ajouter des liens réferrés automatiquement et de faire des transactions sur différentes blockchains.
+Pour l'installer, vous devez:
 1/Pour utiliser les outils supplémentaires il faut installer tampermonkey
 2/Ajouter un script depuis tampermonkey et copier collet le code depuis Tampermonkey_script
+3/Retourner/Rafraichir le site de layer3 et cliquer sur l'icone en haut à gauche
+
+*Le ref du dev est réglé par défaut et est utilisé 1/3 du temps autremenent
 *Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/jumper.
-Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer.
-Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi auparavant), vous pouvez envoyer une petite quantité de gaz au contrat intelligent.
+  Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer.
+  Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi auparavant), vous pouvez envoyer une petite quantité de gaz au contrat intelligent.
 
 ==========================================================
 
