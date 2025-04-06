@@ -32,3 +32,20 @@ Vous devez:
 *Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/jumper.
 Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer.
 Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi auparavant), vous pouvez envoyer une petite quantité de gaz au contrat intelligent.
+
+==========================================================
+
+Liste of smartcontract per chain/List des smartcontracts par chaine :
+
+Base : 0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae
+Berachain : 0xeeeeee9ec4769a09a76a83c7bc42b185872860ee
+Bob : 0x00000000aa467eba42a3d604b3d74d63b2b6c6cb
+Ink : 0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089
+Mode : 0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae
+Monad : 0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1
+Optimism : 0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae
+Soneium : 0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e
+Superposition : 0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746
+Superseed : 0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089
+Unichain : 0x3a23F943181408EAC424116Af7b7790c94Cb97a5
+Zora : 0xa5F565650890fBA1824Ee0F21EbBbF660a179934
