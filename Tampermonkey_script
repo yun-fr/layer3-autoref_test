@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 Ref Switcher & Transfer
 // @namespace    http://tampermonkey.net/
-// @version      3a
+// @version      3.0.1
 // @description  Multitools standalone pour app.layer3.xyz avec gestion des refs et transferts
 // @author       Yun
 // @match        https://app.layer3.xyz/*
