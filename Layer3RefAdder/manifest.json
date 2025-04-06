@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Layer3 Ref Switcher",
-  "version": "1.1",
-  "description": "Add a ref automatically on app.layer3.xyz made by Yun",
+  "version": "2",
+  "description": "Multitools on app.layer3.xyz made by Yun",
   "permissions": [
     "storage",
     "*://*.layer3.xyz/*"
@@ -18,6 +18,12 @@
     }
   ],
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "72": "images/icon72.png"
+    }
+  },
+  "icons": {
+    "72": "images/icon72.png"
   }
 }
