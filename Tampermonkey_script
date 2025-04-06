@@ -376,8 +376,16 @@
         const enableTransferWindow = enableWindowCheckbox.checked;
         GM_setValue("enableTransferWindow", enableTransferWindow);
         if (enableTransferWindow) {
-            document.body.appendChild(container);
-            document.body.appendChild(showButton);
+            // Si la fenêtre n'est pas dans le DOM, l'ajouter
+            if (!document.body.contains(container)) {
+                document.body.appendChild(container);
+                document.body.appendChild(showButton);
+            }
+            // Si elle est masquée, la réafficher et masquer le bouton "Afficher"
+            if (container.style.display === "none") {
+                container.style.display = "block";
+                showButton.style.display = "none";
+            }
         } else {
             container.remove();
             showButton.remove();
