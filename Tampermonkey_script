@@ -1,0 +1,96 @@
+// ==UserScript==
+// @name         Layer3 Zero Transfer Bridge
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Gère les transferts de 0 ETH pour l’extension Layer3 Ref Switcher
+// @author       Yun
+// @match        https://app.layer3.xyz/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    "use strict";
+
+    console.log("Tampermonkey Zero Transfer Bridge démarré");
+
+    window.zeroTransferBridge = {
+        connectedAccount: null,
+
+        connect: async function() {
+            if (typeof window.ethereum === "undefined") {
+                throw new Error("Wallet non détecté");
+            }
+            try {
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                if (accounts && accounts.length > 0) {
+                    this.connectedAccount = accounts[0];
+                    console.log("Compte connecté :", this.connectedAccount);
+                    return this.connectedAccount;
+                } else {
+                    throw new Error("Aucun compte connecté");
+                }
+            } catch (error) {
+                console.error("Erreur de connexion :", error);
+                throw error;
+            }
+        },
+
+        switchChain: async function(chainId) {
+            try {
+                await window.ethereum.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [{ chainId: `0x${chainId.toString(16)}` }],
+                });
+                console.log(`Basculement réussi sur la chaîne ${chainId}`);
+                return true;
+            } catch (error) {
+                console.error("Erreur de basculement :", error);
+                throw error;
+            }
+        },
+
+        sendZeroTransfer: async function(chainId, chainName, toAddress, transferCount) {
+            if (!this.connectedAccount) {
+                throw new Error("Connectez le wallet d’abord");
+            }
+
+            const switched = await this.switchChain(chainId);
+            if (!switched) return false;
+
+            console.log(`Tentative de ${transferCount} transfert(s) de 0 ETH sur ${chainName} vers :`, toAddress);
+
+            try {
+                const txHashes = [];
+                for (let i = 0; i < transferCount; i++) {
+                    const txParams = {
+                        chainId: `0x${chainId.toString(16)}`,
+                        from: this.connectedAccount,
+                        to: toAddress,
+                        value: "0x0",
+                        data: "0x",
+                        gas: "0x5208"
+                    };
+
+                    const txHash = await window.ethereum.request({
+                        method: "eth_sendTransaction",
+                        params: [txParams],
+                    });
+
+                    console.log(`Transfert ${i + 1}/${transferCount} envoyé sur ${chainName}, hash :`, txHash);
+                    txHashes.push(txHash);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+                return txHashes;
+            } catch (error) {
+                console.error(`Erreur sur ${chainName} :`, error);
+                throw error;
+            }
+        },
+
+        isAvailable: function() {
+            return typeof window.ethereum !== "undefined";
+        }
+    };
+
+    console.log("Zero Transfer Bridge exposé via window.zeroTransferBridge");
+})();
