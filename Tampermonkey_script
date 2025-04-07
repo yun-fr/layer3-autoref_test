@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Layer3 Multitools
+// @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
 // @version      3.0.2c
 // @description  Multitools standalone pour app.layer3.xyz avec gestion des refs et transferts
@@ -91,7 +91,7 @@
     configContainer.style.display = "none";
 
     const configTitle = document.createElement("h3");
-    configTitle.textContent = "Layer3 Multitools v" + GM_info.script.version;
+    configTitle.textContent = "Layer3 autoref v" + GM_info.script.version;
     configTitle.style.margin = "0 0 10px 0";
     configTitle.style.fontSize = "14px";
 
