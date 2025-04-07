@@ -13,7 +13,7 @@
     "use strict";
 
     const blockchains = {
-        base: { id: 8453, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#2196F3" },
+        base: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#2196F3" },
         berachain: { id: 80094, address: "0xeeeeee9ec4769a09a76a83c7bc42b185872860ee", color: "#FF9800" },
         bob: { id: 60808, address: "0x00000000aa467eba42a3d604b3d74d63b2b6c6cb", color: "#3F51B5" },
         ink: { id: 57073, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#FF4081" },
