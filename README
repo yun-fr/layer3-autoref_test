@@ -4,7 +4,8 @@ Tip : 0x1AC205EfecC2fE31377E273dB93F4Bb145C67A19
 ================ENGLISH==================================
 
 This is a tampermonkey script that work on Chrome/Brave/Firefox
-The goal is to add ref on layer3 link and to got a interface to send transaction on different blockchain.
+The main goal is to add a ref on Layer3 links automatically to which I added a tool helping to make multichain transactions for streaks.
+
 To install you have to :
 1/Install tampermonkey
 2/Add a new script on tampermonkey, don't forget to remove content (template) to make it empty
@@ -20,7 +21,8 @@ To install you have to :
 ================FRANCAIS==================================
 
 Ceci est un script tampermonkey qui fonctionne sur Brave/Chrome/Firefox
-Le but de ce script est d'ajouter des liens de parrainage automatiquement sur layer3 et de faire des transactions sur différentes blockchains.
+Le but principal est d'ajouter un ref sur les liens Layer3 automatiquement auquel j'ai ajouté un outil aidant à faire des transactions multichain pour les streaks.
+
 Pour l'installer, vous devez:
 1/Installer l'extension tampermonkey
 2/Créer un nouveau script sur tampermonkey, n'oubliez pas de supprimer le contenu (template) pour qu'il soit vide
