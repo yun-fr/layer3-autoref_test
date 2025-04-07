@@ -16,7 +16,8 @@ To install you have to :
 *Don't user your own wallet for ref, you need a secondary wallet or it won't work
 *Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/lifi or mine on base.
   This is done to generate transaction that won't failed. It's a good alternative to onchaingm that cost ~0,05$ per transaction.
-  If you want to prevent yellow flag on rabby (because your never interact with the smartcontract before), you can send tiny amount of gas to the smartcontract.
+  If you want to prevent yellow flag on rabby (because your never interact with the smartcontract before), 
+  you can send tiny amount of gas to the smartcontract once. (like 0.0000000001 ETH)
 
 ================FRANCAIS==================================
 
@@ -33,4 +34,5 @@ Pour l'installer, vous devez:
 *N'utilisez pas votre wallet mais un secondaire sinon le referall ne fonctionnera pas
 *Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/lifi ou le miens sur base.
   Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer. C'est une bonne alternative à onchaingm qui coûte ~0,05$ la transaction.
-  Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi avec le smartcontract auparavant), vous pouvez envoyer une petite quantité de gaz au contrat intelligent.
+  Si vous souhaitez éviter les yellow flag sur Rabby (parce que vous n’avez jamais interagi avec le smartcontract auparavant), 
+  vous pouvez envoyer une petite quantité de gaz au contrat intelligent une seule fois.  (par exemple 0.0000000001 ETH)
