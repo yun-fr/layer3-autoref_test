@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.0.3
+// @version      3.0.3a
 // @description  Multitools standalone pour app.layer3.xyz avec gestion des refs et transferts
 // @author       Yun
 // @match        https://app.layer3.xyz/*
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script
-// @downloadURL  https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script
+// @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/
+// @downloadURL  https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/
 // ==/UserScript==
 
 (function() {
