@@ -1,9 +1,9 @@
 ENGLISH/FRANCAIS (FRANCAIS PLUS BAS)
-Version 3.0.2e
+Version 3.0.3
 Tip : 0x1AC205EfecC2fE31377E273dB93F4Bb145C67A19
 ================ENGLISH==================================
 
-This is a tampermonkey script that work on Chrome/Brave/Firefox
+This is a tampermonkey script that work on Chrome/Brave/Firefox (for chrome you need to activate developper mode on : chrome://extensions/ )
 The script is only active on https://app.layer3.xyz/ website
 The main goal is to add a ref on Layer3 links automatically to which I added a tool helping to make multichain transactions for streaks.
 
@@ -22,7 +22,7 @@ To install you have to :
 
 ================FRANCAIS==================================
 
-Ceci est un script tampermonkey qui fonctionne sur Brave/Chrome/Firefox
+Ceci est un script tampermonkey qui fonctionne sur Brave/Chrome/Firefox (sur chrome, vous devez activer le mode developpeur : chrome://extensions/ )
 Le script ne s'active que sur https://app.layer3.xyz/
 Le but principal est d'ajouter un ref sur les liens Layer3 automatiquement auquel j'ai ajouté un outil aidant à faire des transactions multichain pour les streaks.
 
