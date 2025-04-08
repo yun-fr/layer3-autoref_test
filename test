@@ -1,0 +1,29 @@
+// ==UserScript==
+// @name         Tampermonkey Test Script
+// @namespace    http://tampermonkey.net/
+// @version      2025.04.08
+// @description  Script de test pour vérifier Tampermonkey avec console et popup
+// @author       Yun
+// @match        *://*/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+// @grant        none
+// @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/test
+// @downloadURL  https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/test
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    
+    console.log('Tampermonkey fonctionne !');
+    console.log('Site actuel : ' + window.location.href);
+    console.log('Timestamp : ' + new Date().toLocaleString());
+    
+    const showPopup = () => {
+        alert('✅ Tampermonkey est actif !\n' +
+              'URL : ' + window.location.hostname + '\n' +
+              'Date : ' + new Date().toLocaleDateString() + '\n' +
+              'Heure : ' + new Date().toLocaleTimeString());
+    };
+    
+    setTimeout(showPopup, 1000);
+})();
