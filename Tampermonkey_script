@@ -7,8 +7,8 @@
 // @match        https://app.layer3.xyz/*
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script.js
-// @downloadURL  https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script.js
+// @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script
+// @downloadURL  https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script
 // ==/UserScript==
 
 (function() {
