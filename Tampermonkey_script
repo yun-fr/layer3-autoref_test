@@ -5,6 +5,7 @@
 // @description  Multitools script for app.layer3.xyz : referall + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
+// @grant        unsafeWindow
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @updateURL    https://raw.githubusercontent.com/yun-fr/layer3-autoref/main/Tampermonkey_script
@@ -382,12 +383,12 @@
     let connectedAccount = null;
 
     async function connectWallet() {
-        if (typeof window.ethereum === "undefined") {
+        if (typeof unsafeWindow.ethereum === "undefined") {
             status.textContent = "Erreur : Wallet non détecté";
             return;
         }
         try {
-            const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+            const accounts = await unsafeWindow.ethereum.request({ method: "eth_requestAccounts" });
             if (accounts && accounts.length > 0) {
                 connectedAccount = accounts[0];
                 status.textContent = `Connected : ${connectedAccount.slice(0, 5)}...`;
@@ -400,7 +401,7 @@
 
     async function switchChain(chainId) {
         try {
-            await window.ethereum.request({
+            await unsafeWindow.ethereum.request({
                 method: "wallet_switchEthereumChain",
                 params: [{ chainId: `0x${chainId.toString(16)}` }],
             });
