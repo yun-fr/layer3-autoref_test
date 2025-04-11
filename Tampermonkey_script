@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.0.4b
+// @version      3.0.4c
 // @description  Multitools script for app.layer3.xyz : referall + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -431,7 +431,7 @@
                     to: toAddress,
                     value: "0x0",
                     data: "0x",
-                    gas: "0x5208"
+                    gas: "0x927c0"
                 };
 
                 const txHash = await unsafeWindow.ethereum.request({
