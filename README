@@ -21,7 +21,7 @@ About multichain transactions generator :
 *If you got "Unrecognized chain ID error" it means you didn't have the blockchain on your wallet, you have to add it manualy first
 *Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/lifi or mine on base.
   This is done to generate transaction that won't failed. It's a good alternative to onchaingm that cost ~0,05$ per transaction.
-  If you want to prevent yellow flag on rabby (because your never interact with the smartcontract before), 
+  If you want to prevent yellow flag on Rabby (because your never interact with the smartcontract before), 
   you can send tiny amount of gas to the smartcontract once. (like 0.0000000001 ETH)
 
 ================FRANCAIS==================================
