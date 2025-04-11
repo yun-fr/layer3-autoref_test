@@ -48,7 +48,7 @@
         const _0x4d = GM_getValue("userRef", "");
         const _0x5e = Math.random() < _0x3c;
         const _0x6f = _0x4d ? (_0x5e ? _0x2b : _0x4d) : _0x2b;
-        const _0x7g = new URL(window.location.href);												   
+        const _0x7g = new URL(window.location.href);
         _0x7g.searchParams.set("ref", _0x6f);
         window.history.pushState({}, document.title, _0x7g.toString());
     }
