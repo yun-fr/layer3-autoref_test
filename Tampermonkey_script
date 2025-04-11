@@ -434,7 +434,7 @@
                     gas: "0x5208"
                 };
 
-                const txHash = await window.ethereum.request({
+                const txHash = await unsafeWindow.ethereum.request({
                     method: "eth_sendTransaction",
                     params: [txParams],
                 });
