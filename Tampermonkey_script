@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.0.4c
+// @version      3.0.5
 // @description  Multitools script for app.layer3.xyz : referall + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -49,7 +49,9 @@
         const _0x5e = Math.random() < _0x3c;
         const _0x6f = _0x4d ? (_0x5e ? _0x2b : _0x4d) : _0x2b;
         const _0x7g = new URL(window.location.href);
+													   
         _0x7g.searchParams.set("ref", _0x6f);
+
         window.history.pushState({}, document.title, _0x7g.toString());
     }
     updateUrl();
@@ -182,6 +184,13 @@
         dropdownMenu.appendChild(checkboxWrapper);
     });
 
+    const updateLabel = document.createElement("div");
+    updateLabel.textContent = "Checking for update...";
+    updateLabel.style.fontSize = "12px";
+    updateLabel.style.marginTop = "10px";
+    updateLabel.style.color = "#333333";
+    configContainer.appendChild(updateLabel);
+
     const configToggleButton = document.createElement("button");
     configToggleButton.textContent = "Close";
     configToggleButton.style.width = "100%";
@@ -198,6 +207,7 @@
     checkboxContainer.appendChild(enableWindowLabel);
 
     configContainer.appendChild(configTitle);
+	configContainer.appendChild(updateLabel);
     configContainer.appendChild(refLabel);
     configContainer.appendChild(refInput);
     configContainer.appendChild(saveButton);
@@ -205,6 +215,8 @@
     configContainer.appendChild(dropdownButton);
     configContainer.appendChild(dropdownMenu);
     configContainer.appendChild(configToggleButton);
+    checkForUpdate(GM_info.script.version, updateLabel);
+    setInterval(() => checkForUpdate(GM_info.script.version, updateLabel), 30 * 60 * 1000);
 
     document.body.appendChild(miniIconContainer);
     document.body.appendChild(configContainer);
@@ -251,7 +263,7 @@
     toggleButton.style.fontSize = "12px";
 
     const connectButton = document.createElement("button");
-    connectButton.textContent = "Connection";
+    connectButton.textContent = "Connect";
     connectButton.style.width = "100%";
     connectButton.style.padding = "6px";
     connectButton.style.marginBottom = "5px";
@@ -476,4 +488,29 @@
         status.textContent = "Connexion...";
         connectWallet();
     });
+
+        async function checkForUpdate(currentVersion, updateLabel) {
+        try {
+            const response = await fetch(GM_info.script.updateURL);
+            const scriptText = await response.text();
+            const versionMatch = scriptText.match(/@version\s+([\d.]+[a-z]*)/);
+            if (versionMatch && versionMatch[1]) {
+                const latestVersion = versionMatch[1];
+                if (latestVersion !== currentVersion) {
+                    updateLabel.innerHTML = `Update Available: v${latestVersion} <a href="${GM_info.script.updateURL}" target="_blank" style="color: #FF5722; text-decoration: underline;">Download</a>`;
+                    updateLabel.style.color = "#FF5722";
+                    updateLabel.style.cursor = "pointer";
+                } else {
+                    updateLabel.textContent = "Up to date";
+                    updateLabel.style.color = "#4CAF50";
+                }
+            } else {
+                updateLabel.textContent = "Unable to check update";
+                updateLabel.style.color = "#FF9800";
+            }
+        } catch (error) {
+            updateLabel.textContent = "Error checking update";
+            updateLabel.style.color = "#FF0000";
+        }
+    }
 })();
