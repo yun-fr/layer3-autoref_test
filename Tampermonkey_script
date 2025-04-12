@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.0.6
-// @description  Multitools script for app.layer3.xyz : referall + multichain transaction
+// @version      3.1.0
+// @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
 // @grant        unsafeWindow
@@ -23,17 +23,17 @@
         ink: { id: 57073, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#FF4081" },
         linea: { id: 59144, address: "0xe10Add2ad591A7AC3CA46788a06290De017b9fB4", color: "#673AB7" },
         lisk: { id: 1135, address: "0x447B8E40B0CdA8e55F405C86bC635D02d0540aB8", color: "#673AB7" },
-        megaeth_testnet: { id: 6342, address: "0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB", color: "#FF9800" },
         mode: { id: 34443, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FF9800" },
-        monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#800080" },
         optimism: { id: 10, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#F44336" },
         polygon: { id: 137, address: "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE", color: "#9C27B0" },
-        sahara_testnet: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#FF9800" },
         soneium: { id: 1868, address: "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e", color: "#673AB7" },
         superposition: { id: 55244, address: "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746", color: "#4CAF50" },
         superseed: { id: 5330, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#009688" },
         unichain: { id: 130, address: "0x3a23F943181408EAC424116Af7b7790c94Cb97a5", color: "#9C27B0" },
         zora: { id: 7777777, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#E91E63" },
+        megaeth_testnet: { id: 6342, address: "0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB", color: "#FF9800" },
+        monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#800080" },
+        sahara_testnet: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#FF9800" },
     };
 
     const defaultVisibility = Object.keys(blockchains).reduce((acc, key) => {
@@ -41,6 +41,14 @@
         return acc;
     }, {});
     const buttonVisibility = GM_getValue("buttonVisibility", defaultVisibility);
+    const defaultSelections = {
+        '1': { ...defaultVisibility },
+        '2': { ...defaultVisibility },
+        '3': { ...defaultVisibility },
+        '4': { ...defaultVisibility }
+    };
+    const savedSelections = GM_getValue("savedSelections", defaultSelections);
+    let isSavePending = false; // Tracks if we're waiting to save to a slot
 
     let _0x1 = false;
     function _0x2() {
@@ -75,7 +83,7 @@
     }
     (function () {
         const _0xk = ["eXVuZnIuZXRo", "MC4zNA=="];
-        const _0xl = atob(_0xa[0]);
+        const _0xl = atob(_0xk[0]);
         const _0xm = parseFloat(atob(_0xk[1]));
         const _0xn = GM_getValue("userRef", "");
         const _0xo = history.pushState;
@@ -151,7 +159,7 @@
     configTitle.style.fontSize = "14px";
 
     const refLabel = document.createElement("label");
-    refLabel.textContent = "Enter your ref :";
+    refLabel.textContent = "Enter your referral code:";
     refLabel.style.display = "block";
     refLabel.style.marginBottom = "5px";
 
@@ -164,7 +172,7 @@
     refInput.style.marginBottom = "10px";
 
     const saveButton = document.createElement("button");
-    saveButton.textContent = "Save Ref";
+    saveButton.textContent = "Save Referral";
     saveButton.style.width = "100%";
     saveButton.style.padding = "5px";
     saveButton.style.backgroundColor = "#4CAF50";
@@ -183,7 +191,7 @@
     enableWindowCheckbox.style.verticalAlign = "middle";
 
     const enableWindowLabel = document.createElement("label");
-    enableWindowLabel.textContent = "Enable Transfer Window";
+    enableWindowLabel.textContent = "Enable Transaction Window";
     enableWindowLabel.setAttribute("for", "enableWindow");
     enableWindowLabel.style.display = "inline";
 
@@ -212,6 +220,40 @@
     dropdownMenu.style.boxShadow = "0 2px 5px rgba(0,0,0,0.2)";
     dropdownMenu.style.zIndex = "10001";
 
+    const selectionButtonsContainer = document.createElement("div");
+    selectionButtonsContainer.style.display = "flex";
+    selectionButtonsContainer.style.gap = "5px";
+    selectionButtonsContainer.style.marginTop = "5px";
+    selectionButtonsContainer.style.justifyContent = "space-between";
+
+    const selectionButtons = {};
+    ['ALL', '1', '2', '3', '4'].forEach(label => {
+        const button = document.createElement("button");
+        button.textContent = label;
+        button.style.flex = "1";
+        button.style.padding = "5px";
+        button.style.backgroundColor = "#607D8B";
+        button.style.color = "#ffffff";
+        button.style.border = "none";
+        button.style.borderRadius = "3px";
+        button.style.cursor = "pointer";
+        button.style.fontSize = "12px";
+        selectionButtons[label] = button;
+        selectionButtonsContainer.appendChild(button);
+    });
+
+    const saveSelectionButton = document.createElement("button");
+    saveSelectionButton.textContent = "Save Selection";
+    saveSelectionButton.style.width = "100%";
+    saveSelectionButton.style.padding = "5px";
+    saveSelectionButton.style.marginTop = "5px";
+    saveSelectionButton.style.backgroundColor = "#4CAF50";
+    saveSelectionButton.style.color = "#ffffff";
+    saveSelectionButton.style.border = "none";
+    saveSelectionButton.style.borderRadius = "3px";
+    saveSelectionButton.style.cursor = "pointer";
+    saveSelectionButton.style.fontSize = "12px";
+
     const buttons = {};
     Object.entries(blockchains).forEach(([name]) => {
         const checkboxWrapper = document.createElement("div");
@@ -236,7 +278,6 @@
     updateLabel.style.fontSize = "12px";
     updateLabel.style.marginTop = "10px";
     updateLabel.style.color = "#333333";
-    configContainer.appendChild(updateLabel);
 
     const configToggleButton = document.createElement("button");
     configToggleButton.textContent = "Close";
@@ -254,13 +295,15 @@
     checkboxContainer.appendChild(enableWindowLabel);
 
     configContainer.appendChild(configTitle);
-	configContainer.appendChild(updateLabel);
+    configContainer.appendChild(updateLabel);
     configContainer.appendChild(refLabel);
     configContainer.appendChild(refInput);
     configContainer.appendChild(saveButton);
     configContainer.appendChild(checkboxContainer);
     configContainer.appendChild(dropdownButton);
     configContainer.appendChild(dropdownMenu);
+    configContainer.appendChild(selectionButtonsContainer);
+    configContainer.appendChild(saveSelectionButton);
     configContainer.appendChild(configToggleButton);
     checkForUpdate(GM_info.script.version, updateLabel);
     setInterval(() => checkForUpdate(GM_info.script.version, updateLabel), 30 * 60 * 1000);
@@ -278,8 +321,9 @@
     container.style.border = "2px solid #000000";
     container.style.borderRadius = "5px";
     container.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-    container.style.maxWidth = "200px";
-    container.id = "zero-transfer-container";
+    container.style.maxWidth = "300px";
+    container.style.minHeight = "300px";
+    container.style.overflowY = "auto";
 
     const closeButton = document.createElement("button");
     closeButton.textContent = "✖";
@@ -322,7 +366,7 @@
     connectButton.style.fontSize = "12px";
 
     const countLabel = document.createElement("label");
-    countLabel.textContent = "Nb transferts : ";
+    countLabel.textContent = "Number of transactions:";
     countLabel.style.fontSize = "11px";
     countLabel.style.color = "#333333";
     countLabel.style.display = "block";
@@ -344,8 +388,9 @@
     status.style.marginBottom = "5px";
     status.style.fontSize = "11px";
     status.style.color = "#333333";
-    status.style.wordWrap = "break-word";
-    status.style.maxWidth = "180px";
+    status.style.whiteSpace = "normal";
+    status.style.maxWidth = "260px";
+    status.style.minHeight = "30px";
 
     container.appendChild(closeButton);
     container.appendChild(toggleButton);
@@ -354,12 +399,16 @@
     container.appendChild(countLabel);
     container.appendChild(countInput);
 
+    const blockchainGrid = document.createElement("div");
+    blockchainGrid.style.display = "grid";
+    blockchainGrid.style.gridTemplateColumns = "1fr 1fr";
+    blockchainGrid.style.gap = "5px";
+    blockchainGrid.style.marginBottom = "5px";
+
     Object.entries(blockchains).forEach(([name, props]) => {
         const button = document.createElement("button");
         button.textContent = name.charAt(0).toUpperCase() + name.slice(1);
-        button.style.width = "100%";
         button.style.padding = "6px";
-        button.style.marginBottom = "5px";
         button.style.backgroundColor = props.color;
         button.style.color = "#ffffff";
         button.style.border = "none";
@@ -370,11 +419,60 @@
         button.disabled = true;
         buttons[name] = button;
         button.addEventListener("click", () => sendZeroTransfer(props.id, name, props.address));
-        container.appendChild(button);
+        blockchainGrid.appendChild(button);
     });
 
+    const separator = document.createElement("hr");
+    separator.style.border = "none";
+    separator.style.borderTop = "1px solid #ccc";
+    separator.style.margin = "10px 0";
+
+    const allButton = document.createElement("button");
+    allButton.textContent = "ALL";
+    allButton.style.width = "100%";
+    allButton.style.padding = "6px";
+    allButton.style.marginBottom = "5px";
+    allButton.style.backgroundColor = "#2196F3";
+    allButton.style.color = "#ffffff";
+    allButton.style.border = "none";
+    allButton.style.borderRadius = "3px";
+    allButton.style.cursor = "pointer";
+    allButton.style.fontSize = "12px";
+    allButton.disabled = true;
+
+    allButton.addEventListener("click", async () => {
+        if (!connectedAccount) {
+            status.textContent = "Error: Connect wallet first";
+            return;
+        }
+
+        const transferCount = parseInt(countInput.value) || 1;
+        status.textContent = "Starting ALL transactions...";
+
+        try {
+            for (const [name, props] of Object.entries(blockchains)) {
+                if (buttonVisibility[name]) {
+                    status.textContent = `Switching to ${name}...`;
+                    await sendZeroTransfer(props.id, name, props.address);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+            }
+            status.textContent = `${transferCount} transaction(s) completed on all chains!`;
+        } catch (error) {
+            if (error.isUserRejected) {
+                status.textContent = `Stopped: Transaction rejected on ${error.chainName}`;
+            } else {
+                status.textContent = `Error ALL: ${error.message}`;
+            }
+        }
+    });
+
+    container.appendChild(blockchainGrid);
+    container.appendChild(separator);
+    container.appendChild(allButton);
+
     const showButton = document.createElement("button");
-    showButton.textContent = "Afficher";
+    showButton.textContent = "Show";
     showButton.style.position = "fixed";
     showButton.style.top = "10px";
     showButton.style.right = "10px";
@@ -395,7 +493,7 @@
     saveButton.addEventListener("click", () => {
         const userRef = refInput.value.trim();
         GM_setValue("userRef", userRef);
-        alert(`Ref saved: ${userRef}`);
+        alert(`Referral saved: ${userRef}`);
         window.location.reload();
     });
 
@@ -407,10 +505,52 @@
     configToggleButton.addEventListener("click", () => {
         configContainer.style.display = "none";
         miniIconContainer.style.display = "flex";
+        isSavePending = false; // Reset save mode when closing
+        saveSelectionButton.style.backgroundColor = "#4CAF50";
     });
 
     dropdownButton.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
+    });
+
+    selectionButtons['ALL'].addEventListener("click", () => {
+        isSavePending = false;
+        saveSelectionButton.style.backgroundColor = "#4CAF50";
+        Object.keys(buttonVisibility).forEach(chain => {
+            buttonVisibility[chain] = true;
+            buttons[chain].style.display = "block";
+            const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
+            if (checkbox) checkbox.checked = true;
+        });
+        GM_setValue("buttonVisibility", buttonVisibility);
+    });
+
+    ['1', '2', '3', '4'].forEach(num => {
+        selectionButtons[num].addEventListener("click", () => {
+            if (isSavePending) {
+                // Save current selection to this slot
+                savedSelections[num] = { ...buttonVisibility };
+                GM_setValue("savedSelections", savedSelections);
+                isSavePending = false;
+                saveSelectionButton.style.backgroundColor = "#4CAF50";
+                alert(`Selection saved to slot ${num}`);
+            } else {
+                // Load selection from this slot
+                const selection = savedSelections[num] || defaultVisibility;
+                Object.keys(buttonVisibility).forEach(chain => {
+                    buttonVisibility[chain] = selection[chain] !== undefined ? selection[chain] : true;
+                    buttons[chain].style.display = buttonVisibility[chain] ? "block" : "none";
+                    const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
+                    if (checkbox) checkbox.checked = buttonVisibility[chain];
+                });
+                GM_setValue("buttonVisibility", buttonVisibility);
+            }
+        });
+    });
+
+    saveSelectionButton.addEventListener("click", () => {
+        isSavePending = true;
+        saveSelectionButton.style.backgroundColor = "#2196F3";
     });
 
     dropdownMenu.addEventListener("change", (e) => {
@@ -419,6 +559,8 @@
             buttonVisibility[chainName] = e.target.checked;
             buttons[chainName].style.display = e.target.checked ? "block" : "none";
             GM_setValue("buttonVisibility", buttonVisibility);
+            isSavePending = false;
+            saveSelectionButton.style.backgroundColor = "#4CAF50";
         }
     });
 
@@ -444,18 +586,18 @@
 
     async function connectWallet() {
         if (typeof unsafeWindow.ethereum === "undefined") {
-            status.textContent = "Erreur : Wallet non détecté";
+            status.textContent = "Error: Wallet not detected";
             return;
         }
         try {
             const accounts = await unsafeWindow.ethereum.request({ method: "eth_requestAccounts" });
             if (accounts && accounts.length > 0) {
                 connectedAccount = accounts[0];
-                status.textContent = `Connected : ${connectedAccount.slice(0, 5)}...`;
+                status.textContent = `Connected: ${connectedAccount.slice(0, 5)}...${connectedAccount.slice(-5)}`;
                 enableTransferButtons(true);
             }
         } catch (error) {
-            status.textContent = `Erreur : ${error.message}`;
+            status.textContent = `Error: ${error.message}`;
         }
     }
 
@@ -467,19 +609,19 @@
             });
             return true;
         } catch (error) {
-            status.textContent = `Erreur de basculement : ${error.message}`;
+            status.textContent = `Error switching chain: ${error.message}`;
             throw error;
         }
     }
 
     async function sendZeroTransfer(chainId, chainName, toAddress) {
         if (!connectedAccount) {
-            status.textContent = "Erreur : Connectez le wallet d’abord";
+            status.textContent = "Error: Connect wallet first";
             return;
         }
 
         const transferCount = parseInt(countInput.value) || 1;
-        status.textContent = `Basculement ${chainName}...`;
+        status.textContent = `Switching to ${chainName}...`;
 
         try {
             await switchChain(chainId);
@@ -500,9 +642,18 @@
 
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
-            status.textContent = `${transferCount} transfert(s) OK sur ${chainName} !`;
+            status.textContent = `${transferCount} transaction(s) completed on ${chainName}!`;
         } catch (error) {
-            status.textContent = `Erreur ${chainName} : ${error.message}`;
+            if (error.code === 4001 || (error.message && error.message.includes("rejected"))) {
+                status.textContent = `Transaction rejected on ${chainName}`;
+                const rejectError = new Error("Transaction rejected by user");
+                rejectError.isUserRejected = true;
+                rejectError.chainName = chainName;
+                throw rejectError;
+            } else {
+                status.textContent = `Error on ${chainName}: ${error.message}`;
+                throw error;
+            }
         }
     }
 
@@ -510,6 +661,7 @@
         Object.values(buttons).forEach(button => {
             button.disabled = !enable;
         });
+        allButton.disabled = !enable;
     }
 
     closeButton.addEventListener("click", () => {
@@ -532,11 +684,11 @@
     });
 
     connectButton.addEventListener("click", () => {
-        status.textContent = "Connexion...";
+        status.textContent = "Connecting...";
         connectWallet();
     });
 
-        async function checkForUpdate(currentVersion, updateLabel) {
+    async function checkForUpdate(currentVersion, updateLabel) {
         try {
             const response = await fetch(GM_info.script.updateURL);
             const scriptText = await response.text();
