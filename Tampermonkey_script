@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.1.1a
+// @version      3.1.1
 // @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
-// @match        *://*.layer3.xyz/*
+// @match        https://app.layer3.xyz/*
 // @grant        unsafeWindow
 // @grant        GM_setValue
 // @grant        GM_getValue
