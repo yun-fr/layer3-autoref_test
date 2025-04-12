@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.1.0
+// @version      3.1.1
 // @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -471,23 +471,8 @@
     container.appendChild(separator);
     container.appendChild(allButton);
 
-    const showButton = document.createElement("button");
-    showButton.textContent = "Show";
-    showButton.style.position = "fixed";
-    showButton.style.top = "10px";
-    showButton.style.right = "10px";
-    showButton.style.padding = "5px";
-    showButton.style.backgroundColor = "#FF5722";
-    showButton.style.color = "#ffffff";
-    showButton.style.border = "none";
-    showButton.style.borderRadius = "3px";
-    showButton.style.cursor = "pointer";
-    showButton.style.display = "none";
-    showButton.style.fontSize = "12px";
-
     if (GM_getValue("enableTransferWindow", true)) {
         document.body.appendChild(container);
-        document.body.appendChild(showButton);
     }
 
     saveButton.addEventListener("click", () => {
@@ -513,7 +498,7 @@
         dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
     });
 
-    selectionButtons['ALL'].addEventListener("click", () => {
+    selectionButtons.ALL.addEventListener("click", () => {
         isSavePending = false;
         saveSelectionButton.style.backgroundColor = "#4CAF50";
         Object.keys(buttonVisibility).forEach(chain => {
@@ -570,15 +555,12 @@
         if (enableTransferWindow) {
             if (!document.body.contains(container)) {
                 document.body.appendChild(container);
-                document.body.appendChild(showButton);
             }
             if (container.style.display === "none") {
                 container.style.display = "block";
-                showButton.style.display = "none";
             }
         } else {
             container.remove();
-            showButton.remove();
         }
     });
 
@@ -666,7 +648,6 @@
 
     closeButton.addEventListener("click", () => {
         container.style.display = "none";
-        showButton.style.display = "none";
         GM_setValue("enableTransferWindow", false);
         enableWindowCheckbox.checked = false;
     });
@@ -674,13 +655,7 @@
     toggleButton.addEventListener("click", () => {
         if (container.style.display !== "none") {
             container.style.display = "none";
-            showButton.style.display = "block";
         }
-    });
-
-    showButton.addEventListener("click", () => {
-        container.style.display = "block";
-        showButton.style.display = "none";
     });
 
     connectButton.addEventListener("click", () => {
