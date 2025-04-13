@@ -15,12 +15,12 @@ To install you have to :
 
 About ref feature :
 *Please note that dev ref is set by default and 1/3 dev fees once personnal ref is set
-*Don't user your own wallet for ref, you need a secondary wallet or it won't work
+*Don't user your own wallet for ref, you need a secondary wallet or it won't work on layer3.
 
 About multichain transactions generator :
 *If you got "Unrecognized chain ID error" it means you didn't have the blockchain on your wallet, you have to add it manualy first
-*Please note that transaction are basically sending 0 to smartcontract of relay/bunguee/lifi or mine on base.
-  This is done to generate transaction that won't failed. It's a good alternative to onchaingm that cost ~0,05$ per transaction.
+*Please note that transaction are basically sending 0 to smartcontract such as relay/bunguee/lifi..
+  It's a good alternative to onchaingm that cost ~0,05$ per transaction in addition of gas.
 
 ================FRANCAIS==================================
 
@@ -36,9 +36,9 @@ Pour l'installer, vous devez:
 
 A propos de l'outil referall :
 *Le ref du dev est réglé par défaut et est utilisé 1/3 du temps autremenent
-*N'utilisez pas votre wallet mais un secondaire sinon le referall ne fonctionnera pas
+*N'utilisez pas votre wallet mais un secondaire sinon le referall ne fonctionnera pas sur layer3.
 
 A propos de l'outil de génération de transaction multichain :
 *Si vous avez l'erreur : "Unrecognized chain ID error" cela veut dire que vous n'avez pas cette blockchain sur votre wallet, vous devez l'ajouter manuellement avant
-*Veuillez noter que les transactions consistent essentiellement à envoyer 0 à des smartcontracts de relay/bunguee/lifi ou le miens sur base.
-  Ceci dans l'optique de générer des transactions qui ne risquent pas d’échouer. C'est une bonne alternative à onchaingm qui coûte ~0,05$ la transaction.
+*Veuillez noter que les transactions consistent simplement à envoyer 0 à des smartcontracts tel que relay/bunguee/lifi..
+  C'est une bonne alternative à onchaingm qui coûte ~0,05$ la transaction en plus des gas.
