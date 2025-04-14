@@ -19,7 +19,7 @@ About ref feature :
 
 About multichain transactions generator :
 *If you got "Unrecognized chain ID error" it means you didn't have the blockchain on your wallet, you have to add it manualy first
-*Please note that transaction are basically sending 0 to smartcontract such as relay/bunguee/lifi..
+*Please note that transaction are basically sending 0 to smartcontract such as relay/bunguee/lifi/layerswap..
   It's a good alternative to onchaingm that cost ~0,05$ per transaction in addition of gas.
 
 ================FRANCAIS==================================
@@ -40,5 +40,5 @@ A propos de l'outil referall :
 
 A propos de l'outil de génération de transaction multichain :
 *Si vous avez l'erreur : "Unrecognized chain ID error" cela veut dire que vous n'avez pas cette blockchain sur votre wallet, vous devez l'ajouter manuellement avant
-*Veuillez noter que les transactions consistent simplement à envoyer 0 à des smartcontracts tel que relay/bunguee/lifi..
+*Veuillez noter que les transactions consistent simplement à envoyer 0 à des smartcontracts tel que relay/bunguee/lifi/layerswap..
   C'est une bonne alternative à onchaingm qui coûte ~0,05$ la transaction en plus des gas.
