@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.1.2
+// @version      3.1.3
 // @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -16,39 +16,63 @@
     "use strict";
 
     const blockchains = {
-        arbitrum: { id: 42161, address: "0xe4A0b241D8345d86FB140D40c87C5fbDd685B9dd", color: "#3F51B5" },
-        base: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#2196F3" },
-        berachain: { id: 80094, address: "0xeeeeee9ec4769a09a76a83c7bc42b185872860ee", color: "#FF9800" },
-        bob: { id: 60808, address: "0x00000000aa467eba42a3d604b3d74d63b2b6c6cb", color: "#3F51B5" },
-        ink: { id: 57073, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#FF4081" },
-        linea: { id: 59144, address: "0xe10Add2ad591A7AC3CA46788a06290De017b9fB4", color: "#673AB7" },
-        lisk: { id: 1135, address: "0x447B8E40B0CdA8e55F405C86bC635D02d0540aB8", color: "#673AB7" },
-        mode: { id: 34443, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FF9800" },
-        optimism: { id: 10, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#F44336" },
-        polygon: { id: 137, address: "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE", color: "#9C27B0" },
-        soneium: { id: 1868, address: "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e", color: "#673AB7" },
-        superposition: { id: 55244, address: "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746", color: "#4CAF50" },
-        superseed: { id: 5330, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#009688" },
-        unichain: { id: 130, address: "0x3a23F943181408EAC424116Af7b7790c94Cb97a5", color: "#9C27B0" },
-        zora: { id: 7777777, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#E91E63" },
-        megaeth_testnet: { id: 6342, address: "0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB", color: "#FF9800" },
-        monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#800080" },
-        sahara_testnet: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#FF9800" },
+	    arbitrum: { id: 42161, address: "0xe4A0b241D8345d86FB140D40c87C5fbDd685B9dd", color: "#2A3A5E", value: "0x0", data: "0x", gas: "0x927c0" }, //izumi
+        base: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#0052FF", value: "0x0", data: "0x", gas: "0x927c0" }, //yun
+        berachain: { id: 80094, address: "0xf909c4Ae16622898b885B89d7F839E0244851c66", color: "#F5B029", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
+        bob: { id: 60808, address: "0x00000000aa467eba42a3d604b3d74d63b2b6c6cb", color: "#4A90E2", value: "0x0", data: "0x", gas: "0x927c0" }, //relay
+        ink: { id: 57073, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#FF2D55", value: "0x0", data: "0x", gas: "0x927c0" }, //relay
+		fuse: { id: 122, address: "0x2Fc617E933a52713247CE25730f6695920B3befe", color: "#5856D6", value: "0x0", data: "0x", gas: "0x927c0" }, //layerswap
+        linea: { id: 59144, address: "0xe10Add2ad591A7AC3CA46788a06290De017b9fB4", color: "#121212", value: "0x0", data: "0x", gas: "0x927c0" }, //rubyscore
+        lisk: { id: 1135, address: "0x447B8E40B0CdA8e55F405C86bC635D02d0540aB8", color: "#00AEE9", value: "0x0", data: "0x", gas: "0x927c0" }, //uniswap v3
+        mode: { id: 34443, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FFD60A", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
+        optimism: { id: 10, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FF0420", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
+        polygon: { id: 137, address: "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE", color: "#8247E5", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
+        soneium: { id: 1868, address: "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e", color: "#1A73E8", value: "0x0", data: "0x", gas: "0x927c0" },
+        superposition: { id: 55244, address: "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746", color: "#00C4B4", value: "0x0", data: "0x", gas: "0x927c0" },
+        superseed: { id: 5330, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#2ECC71", value: "0x0", data: "0x", gas: "0x927c0" },
+        unichain: { id: 130, address: "0x3a23F943181408EAC424116Af7b7790c94Cb97a5", color: "#E040FB", value: "0x0", data: "0x", gas: "0x927c0" }, //bungee
+        zora: { id: 7777777, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#F4B678", value: "0x0", data: "0x", gas: "0x927c0" }, //relay
+        megaeth_testnet: { id: 6342, address: "0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB", color: "#FF6F61", value: "0x0", data: "0x", gas: "0x927c0" },
+        monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#9B59B6", value: "0x0", data: "0x", gas: "0x927c0" },
+        sahara_testnet: { id: 313313, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#F1C40F", value: "0x0", data: "0x", gas: "0x927c0" },
+
+		// This part is temporary according to layer3 quest
+        gdollar: { id: 122, address: "0xd253A5203817225e9768C05E5996d642fb96bA86", color: "#C70039", value: "0x0", data: "0x4e71d92d", gas: "0x927c0" }, // claim G dollar
+		gmink: { id: 57073, address: "0x9F500d075118272B3564ac6Ef2c70a9067Fd2d3F", color: "#900C3F", value: "0x0", data: "0xe884624b0000000000000000000000001AC205EfecC2fE31377E273dB93F4Bb145C67A19", gas: "0x927c0" }, //gm on ink to yun
+		gmsuperpositon: { id: 55244, address: "0x7a8Ed5FB3E9B310c9c9DE78E605c2DaB35Ad2ccc", color: "#581845", value: "0x0", data: "0x", gas: "0x927c0" }, // onchain gm on superposition
+
+        //add personalize here (will be erase on update)
+		//customize1 { id: 7777777, address: "0xDC3D8318Fbaec2de49281843f5bba22e78338146", color: "#FF5733", value: "0x0", data: "0x632a9a52", gas: "0x927c0" }, //Example : Vote on rubyscore on zora
+        //customize2: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#FFC107", value: "0x0", data: "0x", gas: "0x927c0" },
+        //customize3: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#FFC107", value: "0x0", data: "0x", gas: "0x927c0" },
+        //customize4: { id: 8453, address: "0x29ac75f8c61db98815f7ce6674c453ee6f6d21b8", color: "#FFC107", value: "0x0", data: "0x", gas: "0x927c0" },
     };
 
     const defaultVisibility = Object.keys(blockchains).reduce((acc, key) => {
         acc[key] = true;
         return acc;
     }, {});
-    const buttonVisibility = GM_getValue("buttonVisibility", defaultVisibility);
+    const savedVisibility = GM_getValue("buttonVisibility", {});
+    const buttonVisibility = { ...defaultVisibility, ...savedVisibility };
+    GM_setValue("buttonVisibility", buttonVisibility);
+
     const defaultSelections = {
         '1': { ...defaultVisibility },
         '2': { ...defaultVisibility },
         '3': { ...defaultVisibility },
-        '4': { ...defaultVisibility }
+        '4': { ...defaultVisibility },
+        '5': { ...defaultVisibility }
     };
-    const savedSelections = GM_getValue("savedSelections", defaultSelections);
-    let isSavePending = false; // Tracks if we're waiting to save to a slot
+    const savedSelectionsRaw = GM_getValue("savedSelections", {});
+    const savedSelections = {
+        '1': { ...defaultVisibility, ...savedSelectionsRaw['1'] },
+        '2': { ...defaultVisibility, ...savedSelectionsRaw['2'] },
+        '3': { ...defaultVisibility, ...savedSelectionsRaw['3'] },
+        '4': { ...defaultVisibility, ...savedSelectionsRaw['4'] },
+        '5': { ...defaultVisibility, ...savedSelectionsRaw['5'] }
+    };
+    GM_setValue("savedSelections", savedSelections);
+    let isSavePending = false;
 
     let _0x1 = false;
     function _0x2() {
@@ -227,7 +251,7 @@
     selectionButtonsContainer.style.justifyContent = "space-between";
 
     const selectionButtons = {};
-    ['ALL', '1', '2', '3', '4'].forEach(label => {
+    ['ALL', '1', '2', '3', '4', '5', 'CLEAR'].forEach(label => {
         const button = document.createElement("button");
         button.textContent = label;
         button.style.flex = "1";
@@ -260,7 +284,7 @@
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.id = `checkbox-${name}`;
-        checkbox.checked = buttonVisibility[name];
+        checkbox.checked = buttonVisibility[name] !== undefined ? buttonVisibility[name] : true;
         checkbox.style.marginRight = "5px";
 
         const label = document.createElement("label");
@@ -404,6 +428,8 @@
     blockchainGrid.style.gridTemplateColumns = "1fr 1fr";
     blockchainGrid.style.gap = "5px";
     blockchainGrid.style.marginBottom = "5px";
+    blockchainGrid.style.maxHeight = "400px";
+    blockchainGrid.style.overflowY = "auto";
 
     Object.entries(blockchains).forEach(([name, props]) => {
         const button = document.createElement("button");
@@ -415,10 +441,10 @@
         button.style.borderRadius = "3px";
         button.style.cursor = "pointer";
         button.style.fontSize = "12px";
-        button.style.display = buttonVisibility[name] ? "block" : "none";
+        button.style.display = typeof buttonVisibility[name] === "undefined" || buttonVisibility[name] ? "block" : "none";
         button.disabled = true;
         buttons[name] = button;
-        button.addEventListener("click", () => sendZeroTransfer(props.id, name, props.address));
+        button.addEventListener("click", () => sendTransfer(props.id, name, props.address));
         blockchainGrid.appendChild(button);
     });
 
@@ -453,7 +479,7 @@
             for (const [name, props] of Object.entries(blockchains)) {
                 if (buttonVisibility[name]) {
                     status.textContent = `Switching to ${name}...`;
-                    await sendZeroTransfer(props.id, name, props.address);
+                    await sendTransfer(props.id, name, props.address);
                     await new Promise(resolve => setTimeout(resolve, 1000));
                 }
             }
@@ -490,7 +516,7 @@
     configToggleButton.addEventListener("click", () => {
         configContainer.style.display = "none";
         miniIconContainer.style.display = "flex";
-        isSavePending = false; // Reset save mode when closing
+        isSavePending = false;
         saveSelectionButton.style.backgroundColor = "#4CAF50";
     });
 
@@ -501,36 +527,58 @@
     selectionButtons.ALL.addEventListener("click", () => {
         isSavePending = false;
         saveSelectionButton.style.backgroundColor = "#4CAF50";
-        Object.keys(buttonVisibility).forEach(chain => {
-            buttonVisibility[chain] = true;
-            buttons[chain].style.display = "block";
-            const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
-            if (checkbox) checkbox.checked = true;
+        Object.keys(blockchains).forEach(chain => {
+            if (buttons[chain]) {
+                buttonVisibility[chain] = true;
+                buttons[chain].style.display = "block";
+                const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            }
         });
         GM_setValue("buttonVisibility", buttonVisibility);
     });
 
-    ['1', '2', '3', '4'].forEach(num => {
+    ['1', '2', '3', '4', '5'].forEach(num => {
         selectionButtons[num].addEventListener("click", () => {
             if (isSavePending) {
-                // Save current selection to this slot
                 savedSelections[num] = { ...buttonVisibility };
                 GM_setValue("savedSelections", savedSelections);
                 isSavePending = false;
                 saveSelectionButton.style.backgroundColor = "#4CAF50";
                 alert(`Selection saved to slot ${num}`);
             } else {
-                // Load selection from this slot
                 const selection = savedSelections[num] || defaultVisibility;
-                Object.keys(buttonVisibility).forEach(chain => {
-                    buttonVisibility[chain] = selection[chain] !== undefined ? selection[chain] : true;
-                    buttons[chain].style.display = buttonVisibility[chain] ? "block" : "none";
-                    const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
-                    if (checkbox) checkbox.checked = buttonVisibility[chain];
+                Object.keys(blockchains).forEach(chain => {
+                    if (buttons[chain]) {
+                        buttonVisibility[chain] = selection[chain] !== undefined ? selection[chain] : true;
+                        buttons[chain].style.display = buttonVisibility[chain] ? "block" : "none";
+                        const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
+                        if (checkbox) {
+                            checkbox.checked = buttonVisibility[chain];
+                        }
+                    }
                 });
                 GM_setValue("buttonVisibility", buttonVisibility);
             }
         });
+    });
+
+    selectionButtons.CLEAR.addEventListener("click", () => {
+        isSavePending = false;
+        saveSelectionButton.style.backgroundColor = "#4CAF50";
+        Object.keys(blockchains).forEach(chain => {
+            if (buttons[chain]) {
+                buttonVisibility[chain] = false;
+                buttons[chain].style.display = "none";
+                const checkbox = dropdownMenu.querySelector(`#checkbox-${chain}`);
+                if (checkbox) {
+                    checkbox.checked = false;
+                }
+            }
+        });
+        GM_setValue("buttonVisibility", buttonVisibility);
     });
 
     saveSelectionButton.addEventListener("click", () => {
@@ -542,7 +590,9 @@
         if (e.target.type === "checkbox") {
             const chainName = e.target.id.replace("checkbox-", "");
             buttonVisibility[chainName] = e.target.checked;
-            buttons[chainName].style.display = e.target.checked ? "block" : "none";
+            if (buttons[chainName]) {
+                buttons[chainName].style.display = e.target.checked ? "block" : "none";
+            }
             GM_setValue("buttonVisibility", buttonVisibility);
             isSavePending = false;
             saveSelectionButton.style.backgroundColor = "#4CAF50";
@@ -596,7 +646,7 @@
         }
     }
 
-    async function sendZeroTransfer(chainId, chainName, toAddress) {
+    async function sendTransfer(chainId, chainName, toAddress) {
         if (!connectedAccount) {
             status.textContent = "Error: Connect wallet first";
             return;
@@ -607,14 +657,19 @@
 
         try {
             await switchChain(chainId);
+            const blockchain = blockchains[chainName];
+            if (!blockchain) {
+                throw new Error(`Blockchain configuration not found for ${chainName}`);
+            }
+
             for (let i = 0; i < transferCount; i++) {
                 const txParams = {
                     chainId: `0x${chainId.toString(16)}`,
                     from: connectedAccount,
                     to: toAddress,
-                    value: "0x0",
-                    data: "0x",
-                    gas: "0x927c0"
+                    value: blockchain.value,
+                    data: blockchain.data,
+                    gas: blockchain.gas
                 };
 
                 const txHash = await unsafeWindow.ethereum.request({
