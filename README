@@ -42,3 +42,4 @@ A propos de l'outil de génération de transaction multichain :
 *Si vous avez l'erreur : "Unrecognized chain ID error" cela veut dire que vous n'avez pas cette blockchain sur votre wallet, vous devez l'ajouter manuellement avant
 *Veuillez noter que les transactions consistent simplement à envoyer 0 à des smartcontracts tel que relay/bunguee/lifi/layerswap..
   C'est une bonne alternative à onchaingm qui coûte ~0,05$ la transaction en plus des gas.
+
