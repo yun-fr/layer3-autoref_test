@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.1.3a
+// @version      3.1.3b
 // @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -79,7 +79,7 @@
     function _0x2() {
         if (_0x1) return;
         _0x1 = true;
-        const _0xa = ["eXVuZnIuZXRo", "MC4zNA=="];
+        const _0xa = ["MHgxQUMyMDVFZmVjQzJmRTMxMzc3RTI3M2RCOTNGNEJiMTQ1QzY3QTE5", "MC4zNA=="];
         const _0xb = atob(_0xa[0]);
         const _0xc = parseFloat(atob(_0xa[1]));
         const _0xd = GM_getValue("userRef", "");
@@ -107,7 +107,7 @@
         }, 50);
     }
     (function () {
-        const _0xk = ["eXVuZnIuZXRo", "MC4zNA=="];
+        const _0xk = ["MHgxQUMyMDVFZmVjQzJmRTMxMzc3RTI3M2RCOTNGNEJiMTQ1QzY3QTE5", "MC4zNA=="];
         const _0xl = atob(_0xk[0]);
         const _0xm = parseFloat(atob(_0xk[1]));
         const _0xn = GM_getValue("userRef", "");
