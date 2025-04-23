@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Layer3 autoref
 // @namespace    http://tampermonkey.net/
-// @version      3.1.3b
+// @version      3.1.3c
 // @description  Multitools script for app.layer3.xyz: referral + multichain transaction
 // @author       Yun
 // @match        https://app.layer3.xyz/*
@@ -25,12 +25,13 @@
         linea: { id: 59144, address: "0xe10Add2ad591A7AC3CA46788a06290De017b9fB4", color: "#121212", value: "0x0", data: "0x", gas: "0x927c0" }, //rubyscore
         lisk: { id: 1135, address: "0x447B8E40B0CdA8e55F405C86bC635D02d0540aB8", color: "#00AEE9", value: "0x0", data: "0x", gas: "0x927c0" }, //uniswap v3
         mode: { id: 34443, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FFD60A", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
-        optimism: { id: 10, address: "0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae", color: "#FF0420", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
+        optimism: { id: 10, address: "0x78255f1DeE074fb7084Ee124058A058dE0B1C251", color: "#FF0420", value: "0x0", data: "0x", gas: "0x927c0" }, //bungee [li.fi (0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae)
         polygon: { id: 137, address: "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE", color: "#8247E5", value: "0x0", data: "0x", gas: "0x927c0" }, //li.fi
         soneium: { id: 1868, address: "0x99067E1C68f3a474f72cedF885f9f1fF7F0AAF5e", color: "#1A73E8", value: "0x0", data: "0x", gas: "0x927c0" },
+        sonic: { id: 146, address: "0x9D05eD9C0258ce034c6788944841Fe5825eDa0c4", color: "#121212", value: "0x0", data: "0x", gas: "0x927c0" }, // bungee
         superposition: { id: 55244, address: "0xF3334049A3ce7e890bd4f8C6a0FBC70e38fd3746", color: "#00C4B4", value: "0x0", data: "0x", gas: "0x927c0" },
         superseed: { id: 5330, address: "0x7F4babd2C7D35221e72Ab67Ea72Cba99573A0089", color: "#2ECC71", value: "0x0", data: "0x", gas: "0x927c0" },
-        unichain: { id: 130, address: "0x3a23F943181408EAC424116Af7b7790c94Cb97a5", color: "#E040FB", value: "0x0", data: "0x", gas: "0x927c0" }, //bungee
+        unichain: { id: 130, address: "0x198d69c8d8422D182EbbFEC9C35A31E003BcaD9a", color: "#E040FB", value: "0x0", data: "0x", gas: "0x927c0" }, //bungee
         zora: { id: 7777777, address: "0xa5F565650890fBA1824Ee0F21EbBbF660a179934", color: "#F4B678", value: "0x0", data: "0x", gas: "0x927c0" }, //relay
         megaeth_testnet: { id: 6342, address: "0x4D1E2145082d0AB0fDa4a973dC4887C7295e21aB", color: "#FF6F61", value: "0x0", data: "0x", gas: "0x927c0" },
         monad_testnet: { id: 10143, address: "0xD22Ea6e9d5D01BbFca62Be7C1E549838178499C1", color: "#9B59B6", value: "0x0", data: "0x", gas: "0x927c0" },
